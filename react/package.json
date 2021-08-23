@@ -3,7 +3,9 @@
     "test": "vtex-test-tools test"
   },
   "dependencies": {
+    "@aws-amplify/ui-react": "^1.2.10",
     "@vtex/css-handles": "^1.0.0",
+    "aws-amplify": "^4.2.4",
     "classnames": "^2.2.6",
     "ramda": "^0.26.1",
     "react": "^16.12.0",

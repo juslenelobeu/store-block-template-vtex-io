@@ -1,4 +1,10 @@
 import React, { useState } from 'react'
+import Amplify from "aws-amplify";
+import { API } from "aws-amplify";
+
+import awsExports from "./react/aws-exports";
+Amplify.configure(awsExports);
+
 import { useCssHandles } from 'vtex.css-handles'
 
 interface LeadsupmedalProps { }
@@ -7,27 +13,41 @@ const CSS_HANDLES = ['container', 'form', 'formGroup', 'textHighlight', 'input',
 
 const Leadsupmedal: StorefrontFunctionComponent<LeadsupmedalProps> = ({ }) => {
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
+  const [nameValue, setNameValue] = useState('');
+  const [emailValue, setEmailValue] = useState('');
+  const [phoneValue, setPhoneValue] = useState('');
 
   let createLead: any = {}
 
-  const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
+  const submitForm = async (event: React.FormEvent<HTMLFormElement>) => {
     // Preventing the page from reloading
     event.preventDefault();
 
+    const data = {
+      body: {
+        name: nameValue,
+        email: emailValue,
+        phone: phoneValue,
+      }
+    }
+
+    console.log(data)
+    const apiData = await API.post('formapi', '/lead', data)
+    console.log(apiData)
+
     createLead = {
-      nameLead: name,
-      emailLead: email,
-      phoneLead: phone,
+      name: nameValue,
+      email: emailValue,
+      phone: phoneValue,
     }
 
     localStorage.setItem("lead", JSON.stringify(createLead));
 
-    setName('');
-    setEmail('');
-    setPhone('');
+    alert('Cadastro realizado com sucesso!')
+
+    setNameValue('');
+    setEmailValue('');
+    setPhoneValue('');
   }
 
   const handles = useCssHandles(CSS_HANDLES)
@@ -41,8 +61,8 @@ const Leadsupmedal: StorefrontFunctionComponent<LeadsupmedalProps> = ({ }) => {
           <div className={`${handles.formGroup}`}>
             <label htmlFor="" className="f6 b db mb2">Nome Completo</label>
             <input
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={nameValue}
+              onChange={(e) => setNameValue(e.target.value)}
               type="text"
               placeholder="Informe seu nome"
               className={`${handles.input}`}
@@ -52,8 +72,8 @@ const Leadsupmedal: StorefrontFunctionComponent<LeadsupmedalProps> = ({ }) => {
           <div className={`${handles.formGroup}`}>
             <label htmlFor="" className="f6 b db mb2">E-mail</label>
             <input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={emailValue}
+              onChange={(e) => setEmailValue(e.target.value)}
               type="email"
               placeholder="Informe seu email"
               className={`${handles.input}`}
@@ -63,8 +83,8 @@ const Leadsupmedal: StorefrontFunctionComponent<LeadsupmedalProps> = ({ }) => {
           <div className={`${handles.formGroup}`}>
             <label htmlFor="" className="f6 b db mb2">Telefone</label>
             <input
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              value={phoneValue}
+              onChange={(e) => setPhoneValue(e.target.value)}
               type="text"
               placeholder="Informe seu telefone"
               className={`${handles.input}`}

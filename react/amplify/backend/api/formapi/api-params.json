@@ -1,0 +1,35 @@
+{
+  "paths": [
+    {
+      "name": "/lead",
+      "lambdaFunction": "formfunction",
+      "privacy": {
+        "open": true
+      },
+      "policyResourceName": "/lead"
+    }
+  ],
+  "resourceName": "formapi",
+  "apiName": "formapi",
+  "functionArns": [
+    {
+      "lambdaFunction": "formfunction"
+    }
+  ],
+  "privacy": {
+    "auth": 0,
+    "unauth": 0,
+    "authRoleName": "amplify-formlead-dev-115003-authRole",
+    "unAuthRoleName": "amplify-formlead-dev-115003-unauthRole"
+  },
+  "dependsOn": [
+    {
+      "category": "function",
+      "resourceName": "formfunction",
+      "attributes": [
+        "Name",
+        "Arn"
+      ]
+    }
+  ]
+}
