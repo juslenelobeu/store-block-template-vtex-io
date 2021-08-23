@@ -1,9 +1,9 @@
 {
-  "vendor": "vtex",
-  "name": "countdown",
+  "vendor": "hiringcoders2021",
+  "name": "leadsupmedal",
   "version": "0.0.1",
-  "title": "Countdown",
-  "description": "Countdown component",
+  "title": "Leads UpMedal",
+  "description": "Leads UpMedal component",
   "defaultLocale": "pt-BR",
   "builders": {
     "messages": "1.x",

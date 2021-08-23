@@ -1,3 +1,4 @@
-# Store Block course template
+# Custom component VTEX IO - Form Lead
 
-Here you'll learn how to create awesome Store Framework blocks!
+Componente criado para aplicar no desafio 3 do Hiring Coders.
+Formulário de capitação de lead.
